@@ -1,11 +1,68 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
 const Login = () => {
+  const [formvalue, setformvalue] = useState({
+    email: "",
+    password: ""
+  });
+  const navigate = useNavigate();
+  const [err, seterr] = useState({});
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your login logic here
+    try {
+      console.log("sign in with:", formvalue);
+      const errors = validate(formvalue);
+      if (Object.keys(errors).length === 0) {
+        console.log(formvalue);
+        seterr({});
+      } else {
+        seterr({ errors });
+        toast.error(err);
+      }
+      axios
+        .post("http://localhost:5000/signin", formvalue, {
+          withCredentials: true
+        })
+        .then((res) => {
+          console.log(res);
+          toast.success("welcome");
+          sessionStorage.setItem("userId", res.data.data._id);
+          sessionStorage.setItem("role", res.data.data.role);
+          const role = sessionStorage.getItem("role");
+          if (role === "admin") {
+            navigate("/dashboardadmin");
+          } else {
+            navigate("/dashboard");
+          }
+        })
+        .catch((error) => {
+          toast.error(error.response.data.message);
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error.message);
+    }
   };
-
+  const validate = (value) => {
+    const errors = {};
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    if (!value.email) {
+      errors.email = "this feild can't be empty";
+    } else if (!emailRegex.test(value.email)) {
+      errors.email = "enter a valid email";
+    } else if (!value.password) {
+      errors.password = "this feild can't be empty";
+    } else if (value.password < 8) {
+      errors.password = "password must contain atleast 8 characters";
+    }
+    return errors;
+  };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setformvalue({ ...formvalue, [name]: value });
+  };
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-black text-white">
       <h1 className="text-3xl font-bold text-purple-400 mb-8">
@@ -26,6 +83,8 @@ const Login = () => {
               placeholder="Enter your email"
               required
               aria-required="true"
+              value={formvalue.email}
+              onChange={handleChange}
             />
           </div>
 
@@ -43,6 +102,8 @@ const Login = () => {
               required
               aria-required="true"
               minLength="8"
+              value={formvalue.password}
+              onChange={handleChange}
             />
           </div>
 
@@ -54,14 +115,14 @@ const Login = () => {
           </button>
         </form>
         <p className="mt-4 text-sm text-center text-zinc-400">
-          Don't have an account?{" "}
-          <a
-            href="/signup"
+          Don't have an account?
+          <Link
+            to={"/signup"}
             className="text-purple-400 underline hover:text-purple-300 transition-colors duration-200"
             aria-label="Navigate to sign up page"
           >
             Sign up
-          </a>
+          </Link>
         </p>
       </div>
     </div>
