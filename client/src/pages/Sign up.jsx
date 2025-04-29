@@ -18,7 +18,6 @@ const SignUp = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your signup logic here
     try {
       const errors = validate(formvalue);
       if (Object.keys(errors).length === 0) {
@@ -36,7 +35,7 @@ const SignUp = () => {
         console.log(res.data)
         toast.success("Registration succesfull")
         sessionStorage.setItem("userId",res.data._id)
-        navigate("/dashboard")
+        navigate("/calendar")
       })
     } catch (error) {
       console.log(error.message);
@@ -149,7 +148,7 @@ const SignUp = () => {
         <p className="mt-4 text-sm text-center text-zinc-400">
           Already have an account?{" "}
           <Link
-            to={"/login"}
+            to={"/"}
             className="text-purple-400 underline hover:text-purple-300 transition-colors duration-200"
             aria-label="Navigate to login page"
           >

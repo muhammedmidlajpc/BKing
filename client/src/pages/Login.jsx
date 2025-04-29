@@ -32,9 +32,9 @@ const Login = () => {
           sessionStorage.setItem("role", res.data.data.role);
           const role = sessionStorage.getItem("role");
           if (role === "admin") {
-            navigate("/dashboardadmin");
+            navigate("/calendaradmin");
           } else {
-            navigate("/dashboard");
+            navigate("/calendar");
           }
         })
         .catch((error) => {

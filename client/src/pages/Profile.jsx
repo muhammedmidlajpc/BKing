@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { User, Mail, Phone, Lock, Save } from "lucide-react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const Profile = () => {
   const [user, setUser] = useState({
@@ -96,6 +98,7 @@ const Profile = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Header />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">My Profile</h1>
@@ -466,6 +469,7 @@ const Profile = () => {
           transition: background-color 0.2s ease;
         }
       `}</style>
+      <Footer />
     </div>
   );
 };

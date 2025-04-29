@@ -2,7 +2,7 @@ const userModel = require("../model/user.model");
 const bcrypt = require("bcrypt");
 
 module.exports.signup = async (req, res) => {
-  console.log(req.body);
+  console.log("dfa",req.body);
   try {
     const User = req.body;
     const user = await userModel.findOne({ email: User.email });

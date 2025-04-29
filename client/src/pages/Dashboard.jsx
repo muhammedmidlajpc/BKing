@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react"
 import { CalendarDays, Clock, CheckCircle, XCircle } from "lucide-react"
+import Header from "../components/Header"
+import Footer from "../components/Footer"
 
 const Dashboard
  = () => {
@@ -36,6 +38,7 @@ const Dashboard
 
   return (
     <div className="min-h-screen bg-black text-white">
+      <Header />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-purple-400">User Dashboard</h1>
@@ -125,6 +128,7 @@ const Dashboard
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   )
 }

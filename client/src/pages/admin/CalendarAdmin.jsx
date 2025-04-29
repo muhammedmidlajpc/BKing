@@ -1,6 +1,8 @@
 
 import { useState } from "react"
 import { ChevronLeft, ChevronRight, Clock, Plus, Edit, Trash2, User } from "lucide-react"
+import Header from "../../components/Header"
+import Footer from "../../components/Footer"
 
 const CalendarAdmin = () => {
   const [currentDate, setCurrentDate] = useState(new Date())
@@ -166,6 +168,7 @@ const CalendarAdmin = () => {
 
   return (
     <div className="min-h-screen bg-black text-white">
+      <Header />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-purple-400">Calendar Management</h1>
@@ -371,6 +374,7 @@ const CalendarAdmin = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   )
 }
