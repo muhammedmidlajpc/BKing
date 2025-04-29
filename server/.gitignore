@@ -17,3 +17,4 @@ Thumbs.db
 # Build files
 dist/
 coverage/
+server/.env
