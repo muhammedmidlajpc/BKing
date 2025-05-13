@@ -1,5 +1,5 @@
 const userModel = require("../model/user.model");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 module.exports.signup = async (req, res) => {
   console.log("dfa",req.body);
