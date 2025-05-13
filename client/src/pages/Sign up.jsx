@@ -28,7 +28,7 @@ const SignUp = () => {
         console.log(errors);
         toast.error(err);
       }
-      axios.post("http://localhost:5000/signup", formvalue, {
+      axios.post("https://bking.onrender.com/signup", formvalue, {
         withCredentials: true
       })
       .then((res)=>{
