@@ -5,7 +5,7 @@ const userRoutes = require("./routes/user.routes");
 const bookingRoutes = require("./routes/booking.routes");
 require("dotenv").config();
 const app = express();
-app.use(cors({ origin: "https://bking-1.onrender.com/", credentials: true }));
+app.use(cors({ origin: "https://bking-1.onrender.com", credentials: true }));
 app.use(express.json());
 
 app.use(userRoutes);
